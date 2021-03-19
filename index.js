@@ -1,6 +1,16 @@
 //how to make banner comment - ctrl+shift+p and select banner h3
 
 /*
+.########..######..##.....##....###.....######...######..########..####.########..########.....#######.
+.##.......##....##.###...###...##.##...##....##.##....##.##.....##..##..##.....##....##.......##.....##
+.##.......##.......####.####..##...##..##.......##.......##.....##..##..##.....##....##.......##.......
+.######...##.......##.###.##.##.....##..######..##.......########...##..########.....##.......########.
+.##.......##.......##.....##.#########.......##.##.......##...##....##..##...........##.......##.....##
+.##.......##....##.##.....##.##.....##.##....##.##....##.##....##...##..##...........##.......##.....##
+.########..######..##.....##.##.....##..######...######..##.....##.####.##...........##........#######.
+*/
+// todo:first topic
+/*
 .####.##....##.########.########...#######..########..##.....##..######..########.####..#######..##....##
 ..##..###...##....##....##.....##.##.....##.##.....##.##.....##.##....##....##.....##..##.....##.###...##
 ..##..####..##....##....##.....##.##.....##.##.....##.##.....##.##..........##.....##..##.....##.####..##
@@ -220,6 +230,27 @@ function CircleObj(radius) {
 
 const another = new CircleObj(1);
 
+//* Object Destructuring Assignment
+
+const personObject={
+    name5:'ayman elkassas',
+    age5:25,
+    gender5:'male'
+}
+
+let {name5,age5,gender5='Unknown'}=personObject
+console.log(name5,age5,gender5)
+
+//* Object Literals
+const myVar= 'key'
+const myObject={
+    myProp:'myValue',
+    [myVar]:5
+}
+
+console.log(myObject)
+
+
 // * Functions are objects is a js concept
 
 // CircleObj.name
@@ -337,7 +368,10 @@ date.toDateString();
 .##.....##.##.....##.##.....##.##.....##....##.....######.
 */
 
-let numbers = [3, 4];
+// * Arrays vs. Sets
+let numbers = [3222, 4];
+let sets=new Set([3,4, 5]); // object set
+console.log(numbers,sets)
 // * Adding
 // todo:Add from
 //End
@@ -572,3 +606,84 @@ playVideo.apply({name:'ayman'})
 const fn=playVideo.bind({name:'ayman'})
 fn()
 playVideo()
+
+/*
+....###.....######..##....##.##....##..######.
+...##.##...##....##..##..##..###...##.##....##
+..##...##..##.........####...####..##.##......
+.##.....##..######.....##....##.##.##.##......
+.#########.......##....##....##..####.##......
+.##.....##.##....##....##....##...###.##....##
+.##.....##..######.....##....##....##..######.
+*/
+
+// * Callbacks, Promises, Async Await
+
+let posts=[
+    {title:'first post',body:'this is first post'},
+    {title:'second post',body:'this is second post'},
+    {title:'third post',body:'this is third post'},
+]
+
+//todo:callbacks
+
+function getPosts(){
+    setTimeout(()=>{
+        let output='';
+        posts.forEach((post, index) => {
+            output+=`<li>${post.title}</li>`
+        })
+
+        console.log(output)
+    },1000)
+}
+
+function createPostCallback(post,callback){
+    setTimeout(()=>{
+        posts.push(post);
+        callback();
+    },2000)
+}
+
+createPostCallback({title:'post four',body:'this is post four'},getPosts)
+
+// todo: Promise -> resolve (go to then()), reject (go to catch())
+// promise is an interface not class
+
+function createPostPromise(post){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            posts.push(post);
+
+            const error=false;
+            if(!error){
+                resolve();
+            }
+            else{
+                reject('Error:Something went wrong')
+            }
+        },2000)
+    })
+}
+
+createPostPromise({title:'post five',body:'this is post five'})
+    .then(getPosts)
+    .catch(err=>console.log(err))
+
+// promise.all
+const promise1=Promise.resolve('Hello world')
+const promise2=2
+const promise3=new Promise((resolve,reject)=>setTimeout(resolve,2000,'GoodBye'))
+
+Promise.all([promise1, promise2, promise3]).then(values=>console.log(values))
+
+//todo: Async Await
+// most use for await for fetch api
+
+async function init(){
+    await createPostPromise({title:'post six',body:'this is post six'})
+    .then(getPosts)
+    .catch(err=>console.log(err))
+}
+
+init()
