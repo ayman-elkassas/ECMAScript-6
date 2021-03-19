@@ -153,13 +153,13 @@ console.log(a, b);
 
 // do .. while
 
-// for .. in -> for object as key, value
+// todo: for .. in -> for object as key, value
 for (let key in person) {
   console.log(key, person[key]);
 }
 
 let colors = ["red", "blue"];
-// for .. of -> should be an array
+//todo: for .. of -> should be an array
 for (let color of colors) {
   console.log(color);
 }
@@ -253,12 +253,12 @@ console.log(myObject)
 
 // * Functions are objects is a js concept
 
-// CircleObj.name
-// CircleObj.length
-// CircleObj.toString()
-// CircleObj.constructor
-// CircleObj.call({},1)
-// CircleObj.apply({},[1,2,3])
+CircleObj.name
+CircleObj.length
+CircleObj.toString()
+CircleObj.constructor
+CircleObj.call({},1)
+CircleObj.apply({},[1,2,3])
 
 const Circle1 = new Function(
   "radius",
@@ -337,9 +337,9 @@ let clone2 = { ...circle };
 console.log(anotherOne, clone, clone2);
 
 // * Math
-// Math.random()
-// Math.round()
-// Math.max([1,5,10,8])
+Math.random()
+Math.round()
+Math.max([1,5,10,8])
 
 // * String
 // String Primitive
@@ -432,16 +432,153 @@ const numsRemove = [1, 2, 3, 4];
 
 //todo: Remove from
 //End
-// const last=numsRemove.pop()
-// console.log(last)
+const last=numsRemove.pop()
+console.log(last)
 
-//Begging
-// const firstNum=numsRemove.shift()
-// console.log(firstNum)
+// Begging
+const firstNum=numsRemove.shift()
+console.log(firstNum)
 
-//Middle
-// const MiddleNum=numsRemove.splice(2,2)
-// console.log(numsRemove)
+// Middle
+const MiddleNum=numsRemove.splice(2,2)
+console.log(numsRemove)
+
+// * Most Array 8 Methods must know
+
+const items=[
+    {name:'Bike',price:100},
+    {name:'TV',price:200},
+    {name:'Album',price:300},
+    {name:'Book',price:5},
+    {name:'Phone',price:500},
+    {name:'Computer',price:1000},
+    {name:'keyboard',price:25},
+]
+
+// todo: 1- filter (get array of items that achieve condition)
+
+const filteredItems=items.filter((item)=>{
+    return item.price<=100
+})
+
+console.log(filteredItems)
+
+/* result
+[
+    {
+        "name": "Bike",
+        "price": 100
+    },
+    {
+        "name": "Book",
+        "price": 5
+    },
+    {
+        "name": "keyboard",
+        "price": 25
+    }
+]
+*/
+
+// todo: 2- map (map for iterator each object in array and return array of indexed object)
+
+const itemNames=items.map((item)=>{
+    return item
+})
+console.log(itemNames)
+
+// result
+/* item.price
+[
+    100,
+    200,
+    300,
+    5,
+    500,
+    1000,
+    25
+]
+*/
+
+/* item.price<=100
+[
+    true,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true
+]
+*/
+
+// todo: 3- find (get first item in array achieve condition)
+
+const findItem=items.find((item)=>{
+    return item.price==100
+})
+
+console.log(findItem)
+
+/*
+    {
+        "name": "Bike",
+        "price": 100
+    }
+*/
+
+// todo: 4- forEach (for iterator each object in array) no return
+
+items.forEach((item)=>{
+    console.log(item)
+})
+
+/* result
+{name: "Bike", price: 100}
+{name: "Bike", price: 100}
+{name: "TV", price: 200}
+{name: "Album", price: 300}
+{name: "Book", price: 5}
+{name: "Phone", price: 500}
+{name: "Computer", price: 1000}
+{name: "keyboard", price: 25}
+*/
+
+// todo: 5- some (return true if achieve condition)
+
+const hasIndexPensiveItems=items.some((item)=>{
+    return item.price<=100
+})
+
+console.log(hasIndexPensiveItems)
+
+/*
+result : true
+*/
+
+// todo: 6- every (should all members achieve test condition to be true)
+
+const hasIndexPensiveItemsEvery=items.every((item)=>{
+    return item.price<=100
+})
+
+console.log(hasIndexPensiveItemsEvery)
+
+/*
+result : false
+*/
+
+// todo: 7- reduce (accumulate function) 0=> refer value start accumulate
+
+const total=items.reduce((currentTotal,item)=>{
+    return item.price + currentTotal
+},0)
+
+console.log(total)
+
+// todo: 7- includes
+const irm=[1, 2, 3]
+console.log(irm.includes(2))
 
 /*
 .########.##.....##.##....##..######..########.####..#######..##....##..######.
