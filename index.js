@@ -824,3 +824,51 @@ async function init(){
 }
 
 init()
+
+/*
+..#######...#######..########.
+.##.....##.##.....##.##.....##
+.##.....##.##.....##.##.....##
+.##.....##.##.....##.########.
+.##.....##.##.....##.##.......
+.##.....##.##.....##.##.......
+..#######...#######..##.......
+*/
+
+class Person{
+  constructor(name="Anonymous",age=25){
+    this.name=name
+    this.age=age
+  }
+  getGretting(){
+    return `Hi i am ${this.name}`
+  }
+  getDescription(){
+    return `${this.name} is ${this.age} years old`
+  }
+}
+
+class Student extends Person{
+
+  //* using super to access any property or action method from parent
+
+  constructor(name,age,major){
+    //this is initialize parent class
+    super(name,age);
+    this.major=major
+  }
+  hasMajor(){
+    return !!this.major
+  }
+  getDescription(){
+    //todo:to get description from parent
+    let description=super.getDescription()
+    return description
+  }
+}
+
+const me=new Student("Ahmed Ali",25,"Computer Science")
+console.log(me.getDescription())
+
+const other=new Student("Information technology")
+console.log(other.getDescription())
